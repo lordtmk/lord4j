@@ -1,2 +1,4 @@
 # lord4j
-Automating log4j exploit as much as possible
+
+Trying to automate log4j exploit as much as possible
+
