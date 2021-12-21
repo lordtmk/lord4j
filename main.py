@@ -5,3 +5,4 @@ maven = subprocess.Popen('sudo apt install maven', shell=True, stdin=None, stdou
 print('Installing maven..')
 maven.wait()
 print("Maven installed ! ")
+
