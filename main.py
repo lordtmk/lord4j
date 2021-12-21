@@ -4,7 +4,4 @@ import os
 maven = subprocess.Popen('sudo apt install maven', shell=True, stdin=None, stdout=open("/dev/null", "w"), stderr=None, executable="/bin/bash")
 print('Installing maven..')
 maven.wait()
-
-java = subprocess.Popen('sudo apt install java', shell=True, stdin=None, stdout=open("/dev/null", "w"), stderr=None, executable="/bin/bash")
-print('Installing java..')
-java.wait()
+print("Maven installed ! ")
