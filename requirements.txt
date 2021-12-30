@@ -1,0 +1,7 @@
+subprocess
+threading
+http.server
+socketserver
+argparse
+os
+colorama
